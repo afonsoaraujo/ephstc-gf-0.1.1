@@ -1,0 +1,19 @@
+cd src/
+gfortran -I ../include -c results.f90
+gfortran -I ../include -c agregate.f90
+gfortran -I ../include -c output.f90
+gfortran -I ../include -c thermolib3d.f90
+gfortran -I ../include -c nextstep.f90
+gfortran -I ../include -c alloclib.f90
+gfortran -I ../include -c slope.f90
+gfortran -I ../include -c calc.f90
+gfortran -I ../include -c readdata.f90
+gfortran -I ../include -c calendario.f90
+gfortran -I ../include -c init.f90
+gfortran -I ../include -c depst3l2d.f90
+gfortran -I ../include -c routesubsfc.f90
+gfortran -I ../include -c routesfc.f90
+gfortran -I ../include -c ephstc.f90
+gfortran -I ../include -o ephstc ephstc.o routesfc.o routesubsfc.o  depst3l2d.o init.o calendario.o readdata.o calc.o slope.o alloclib.o nextstep.o thermolib3d.o output.o agregate.o results.o
+mv ephstc ../bin
+cd ../

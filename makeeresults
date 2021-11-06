@@ -1,0 +1,6 @@
+cd src/
+ifort -I ../include -automatic -c results.f90
+ifort -I ../include -automatic -c eresults.f90
+ifort -I ../include -automatic -o eresults results.o eresults.o alloclib.o
+mv eresults ../bin
+cd ..

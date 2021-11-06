@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ephstc011" />
+		<Option execution_dir="/home/afonsoaraujo/work/modelos/ephstc/ephstc-gf-0.1.1/workspace/ephstc011/" />
+		<Option pch_mode="2" />
+		<Option compiler="gfortran" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ephstc011" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gfortran" />
+				<Compiler>
+					<Add directory="../../include" />
+				</Compiler>
+				<Linker>
+					<Add directory="../../include" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ephstc011" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gfortran" />
+				<Compiler>
+					<Add directory="../../include" />
+				</Compiler>
+				<Linker>
+					<Add directory="../../include" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../../include" />
+		</Compiler>
+		<Unit filename="include/alloc.inc" />
+		<Unit filename="include/globcst.inc" />
+		<Unit filename="src/ephstc.f90" />
+		<Unit filename="src/init.f90" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
