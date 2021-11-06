@@ -1,0 +1,208 @@
+!
+!  ##################################################################
+!  ##################################################################
+!  ######                                                      ######
+!  ######                 NAMELIST EPHSTCPOS                   ######
+!  ######                                                      ######
+!  ######                     Developed by                     ######
+!  ######               Laboratorio de Hidrologia              ######
+!  ######      Universidade Federal do Rio de Janeiro          ######
+!  ######                      COPPE/UFRJ                      ######
+!  ######                                                      ######
+!  ##################################################################
+!  ##################################################################
+!
+
+!---------------------------------------------------------------------
+!ephstcpos_setup
+!   runname   - nome da simulação
+!   initime   - horário inicial
+!   tstartsfc - início da integração
+!   tstopsfc  - fim da integração
+!   dtbig     - intervalo de integração do modelo atmosférico       - [s]
+!   dtsfc     - intervalo de integração do modelo de superfície     - [s]
+!   dtforc    - intervalo de tempo dos dados forçantes              - [s]
+!   dtroutsfc - intervalo de integração da propagação do escoamento - [s]
+!
+!---------------------------------------------------------------------
+&ephstcpos_setup
+   runname   = 'negro',
+   initime   = '1997-06-19.02:00:00',
+   tstartsfc = 1,
+   tstopsfc  = 765,   
+   dtbig     = 3600,
+   dtsfc     =  900,
+   dtforc    = 3600,
+   dtroutsfc = 3600,
+$END
+
+!---------------------------------------------------------------------
+!ephstcpos_mapgrid
+!   nx       - número de pontos de grade em x;
+!   ny       - número de pontos de grade em y;
+!   nzsoil   - número de camadas de solo;
+!   dx       - resolução da grade em x;
+!   dy       - resolução da grade em y;
+!   nx_forc  - número de pontos de grade em x para os forçantes;
+!   ny_forc  - número de pontos de grade em y para os forçantes;
+!   dx_forc  - resolução da grade em x para os forçantes;
+!   dy_forc  - resolução da grade em y para os forçantes;
+!
+!---------------------------------------------------------------------
+&ephstcpos_mapgrid
+   nx      = 425,
+   ny      = 301,
+   nzsoil  = 3,
+   dx      = 100.0,
+   dy      = 100.0,
+   nx_forc = 43,
+   ny_forc = 30,
+   dx_forc = 1000.0,
+   dy_forc = 1000.0,
+$END
+
+!---------------------------------------------------------------------
+!ephstcpos_sfcfl
+!
+!  maskfile   - máscara para a bacia; 
+!  topofile   - arquivo de topografia;
+!  aspectfile - arquivo com o mapa de aspecto;
+!  slopefile  - arquivo com o mapa de declividades;
+!  lnatbfile  - arquivo com o mapa do índice topográfico
+!  hidrofile  - arquivo com mapa da rede de drenagem
+!  soilfile   - arquivo com o mapa de solos
+!  sdepthfile - arquivo com o mapa das profundidade do solo
+!  vegfile    - arquivo com mapa do tipo de vegetação
+!  ndvifile   - arquivo com mapa do NDVI
+!
+!---------------------------------------------------------------------
+&ephstcpos_sfcfl
+   maskfile   = '../dados/sfc/100m/sgp97_lw-mask100m.dat',
+   topofile   = '../dados/sfc/100m/sgp97_lw-dem100m.dat', 
+   aspectfile = '../dados/sfc/100m/sgp97_lw-aspect100m.dat',       
+   slopefile  = '../dados/sfc/100m/sgp97_lw-slope100m.dat',
+   lnatbfile  = '../dados/sfc/100m/sgp97_lw-LnaTb100m.dat',
+   hidrofile  = '../dados/sfc/100m/sgp97_lw-hidro100m.dat',
+   soilfile   = '../dados/sfc/100m/sgp97_lw-dtext100m.dat',
+   sdepthfile = '../dados/sfc/100m/sgp97_lw-rockdep100m.dat',
+   vegfile    = '../dados/sfc/100m/sgp97_lw-veg100m.dat',
+   ndvifile   = '../dados/sfc/100m/sgp97_lw-ndvi100m.dat',
+$END
+
+
+!---------------------------------------------------------------------
+!ephstcpos_forcfl
+!
+!  tairfile   - temperatura do ar a superfície;
+!  presfile   - pressão atmosférica a superfície;
+!  relhfile   - umidade relativa do ar
+!  wspdfile   - velocidade do vento medida a 10 m;
+!  rsifile    - componente de radiação de onda longa;
+!  rsrfile    - componente de radiação soloar de onda curta;
+!  precipfile - precipitação
+!
+!---------------------------------------------------------------------
+&ephst_forcfl
+   tairfile   = '../dados/forc/1km/sgp97_lw-tair.02190697',
+   presfile   = '../dados/forc/1km/sgp97_lw-pres.02190697',
+   relhfile   = '../dados/forc/1km/sgp97_lw-relh.02190697',
+   wspdfile   = '../dados/forc/1km/sgp97_lw-wspd.02190697',
+   rsifile    = '../dados/forc/1km/sgp97_lw-goes.02190697',
+   rsrfile    = '../dados/forc/1km/sgp97_lw-lw.02190697',
+   precipfile = '../dados/forc/1km/sgp97_lw-precip.02190697',
+$END
+
+!---------------------------------------------------------------------
+!ephstcpos_1Dobsfl (dados de estacoes)
+!
+!  vazaoobs  - vazão observada no exutório da bacia;
+!
+!---------------------------------------------------------------------
+&ephstcpos_2dobsfl
+   rn1Dobs   =
+   lh1Dobs   =
+   sh1Dobs   =
+   gh1Dobs   =
+   wsfc1Dobs =
+   wdp21Dobs =
+   wdp31Dobs =
+   tws1Dobs  =
+   vazaoobs  =
+$END
+
+!---------------------------------------------------------------------
+!ephstcpos_2Dobsfl
+!
+!  QOBSfile  - vazão observada no exutório da bacia;
+!  RnOBSfile - radiação líquida média sobre a bacia;
+!  SFOBSfile - fluxos verticais médios sobre a bacia;
+!---------------------------------------------------------------------
+&ephstcpos_2dobsfl
+   rnflxobs  = 
+   lhflxobs  =
+   shflxobs  =
+   ghflxobs  =
+   wsfcobs   =
+   wdp2obs   =
+   wdp3obs   =
+   twsobs    =
+   vazaoobs  =
+$END
+
+
+!---------------------------------------------------------------------
+!ephstcpos_output  - Opções de saída - Output options
+!
+!  flx2dout      - tipo de arquivo de saída bidimencional
+!                    0 - nenhuma saída
+!                    1 - grads
+!                    2 - GMT (não implementada)
+!
+!  flx1dout      - tipo de arquivo de saída unidimencional
+!                    0 - nenhuma saída
+!                    1 - gnuplot script
+!                    2 - a ser implementada pelo usuario
+!
+!  w2dout        -   (não implementada)
+!  w1dout        -   (não implementada)
+!
+!  mbout         - saída do balanço de massa  (não concluído!)
+!                    0 - nenhuma saída
+!                    1 - gnuplot script
+!
+!  avgfout       - gera arquivos de médias
+!
+!  topmodelout   - saídas para o topmodel
+!
+!  nflxstations  - número de estações de verificação de fluxo
+!
+!  nWstations    - número de estações de verificação de umidade do solo
+!
+!  flx2doutfile  - arquivos de saída dos fluxos 2D;
+!
+!  flx1doutfile  - arquivos de saída dos fluxos 1D; 
+!                  (lista dos pontos fixada em stations.inc)
+!
+!  mbfile        - arquivo de saída do balanço de massa
+!
+!  avgffile      - arquivo de saída de médias
+!              
+!  topmodelfile  - arquivo de saída para o TOPMODEL
+!
+!---------------------------------------------------------------------
+&ephstcpos_output
+   flx2dout  = 1,
+   flx1dout  = 1,
+   w2dout    = 0,
+   w1dout    = 0,
+   mbout     = 0,
+   avgfout   = 0,
+   topmodelout  = 1,
+   nflxstations = 9,
+   nWstations   = 9,
+   flx2doutfile = '../saida/sgp97_lw-flx2d-100m2.',
+   flx1doutfile = '../saida/sgp97_lw-flx1d-100m2-',
+   mbfile       = '../saida/sgp97_lw-mb100m2-',
+   avgffile     = '../saida/sgp97_lw-avgf100m2.dat',
+   topmodelfile = '../saida/sgp97_lw-epq100m2.dat',
+$END

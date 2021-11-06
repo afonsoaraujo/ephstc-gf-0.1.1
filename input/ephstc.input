@@ -1,0 +1,338 @@
+!
+!  ##################################################################
+!  ##################################################################
+!  ######                                                      ######
+!  ######                   NAMELIST EPHST                     ######
+!  ######                                                      ######
+!  ######                     Developed by                     ######
+!  ######               Laboratorio de Hidrologia              ######
+!  ######      Universidade Federal do Rio de Janeiro          ######
+!  ######                      COPPE/UFRJ                      ######
+!  ######                                                      ######
+!  ##################################################################
+!  ##################################################################
+!
+
+
+!---------------------------------------------------------------------
+!ephst_setup
+!   runname   - nome da simulação
+!   initime   - horário inicial
+!   tstartsfc - início da integração
+!   tstopsfc  - fim da integração
+!   dtbig     - intervalo de integração do modelo atmosférico       - [s]
+!   dtsfc     - intervalo de integração do modelo de superfície     - [s]
+!   dtforc    - intervalo de tempo dos dados forçantes              - [s]
+!   dtroutsfc - intervalo de integração da propagação do escoamento - [s]
+!
+!---------------------------------------------------------------------
+&ephst_setup
+   runname   = 'SGP97_LW-100m3',
+   initime   = '1997-06-19.02:00:00',
+   tstartsfc = 1,
+   tstopsfc  = 765,   
+   dtbig     = 3600,
+   dtsfc     =  900,
+   dtforc    = 3600,
+   dtroutsfc = 3600,
+$END
+
+!---------------------------------------------------------------------
+!ephst_mapgrid
+!   NX       - número de pontos de grade em x;
+!   NY       - número de pontos de grade em y;
+!   NZSOIL   - número de camadas de solo;
+!   DX       - resolução da grade em x;
+!   DY       - resolução da grade em y;
+!   Xorig    - origem dos eixos em x;
+!   Yorig    - origem dos eixos em y;
+!   OffSetX  - deslocamento dos eixos em x;
+!   OffSetY  - deslocamento dos eixos em y;    
+!   NX_Forc  - número de pontos de grade em x para os forçantes;
+!   NY_Forc  - número de pontos de grade em y para os forçantes;
+!   DX_Forc  - resolução da grade em x para os forçantes;
+!   DY_Forc  - resolução da grade em y para os forçantes;
+!   NDIRS    - número de direções de distribuição do escoamento
+!
+!---------------------------------------------------------------------
+&ephst_mapgrid
+   nx      = 425,
+   ny      = 301,
+   nzsoil  = 3,
+   dx      = 100.0,
+   dy      = 100.0,
+   Xorig   =   0.0,  
+   Yorig   =   0.0,
+   OffSetX =   0.0,
+   OffSetY =   0.0,
+   nx_forc = 43,
+   ny_forc = 30,
+   DX_Forc = 1000.0,
+   DY_Forc = 1000.0,
+   NDIRS   = 4,
+$END
+
+!---------------------------------------------------------------------
+!ephst_sfcfl
+!
+!  maskfile   - máscara para a bacia; 
+!  topofile   - arquivo de topografia;
+!  aspectfile - arquivo com o mapa de aspecto;
+!  slopefile  - arquivo com o mapa de declividades;
+!  lnatbfile  - arquivo com o mapa do índice topográfico
+!  hidrofile  - arquivo com mapa da rede de drenagem
+!  soilfile   - arquivo com o mapa de solos
+!  sdepthfile - arquivo com o mapa das profundidade do solo
+!  vegfile    - arquivo com mapa do tipo de vegetação
+!  ndvifile   - arquivo com mapa do NDVI
+!
+!---------------------------------------------------------------------
+&ephst_sfcfl
+   maskfile   = '../dados/sfc/100m/sgp97_lw-mask100m.dat',
+   topofile   = '../dados/sfc/100m/sgp97_lw-dem100m.dat', 
+   aspectfile = '../dados/sfc/100m/sgp97_lw-aspect100m.dat',       
+   slopefile  = '../dados/sfc/100m/sgp97_lw-slope100m.dat',
+   lnatbfile  = '../dados/sfc/100m/sgp97_lw-LnaTb100m.dat',
+   hidrofile  = '../dados/sfc/100m/sgp97_lw-hidro100m.dat',
+   soilfile   = '../dados/sfc/100m/sgp97_lw-dtext100m.dat',
+   sdepthfile = '../dados/sfc/100m/sgp97_lw-rockdep100m.dat',
+   vegfile    = '../dados/sfc/100m/sgp97_lw-veg100m.dat',
+   ndvifile   = '../dados/sfc/100m/sgp97_lw-ndvi100m.dat',
+$END
+
+
+!---------------------------------------------------------------------
+!ephst_forcfl
+!
+!  tairfile   - temperatura do ar a superfície;
+!  presfile   - pressão atmosférica a superfície;
+!  relhfile   - umidade relativa do ar
+!  wspdfile   - velocidade do vento medida a 10 m;
+!  rsifile    - componente de radiação de onda longa;
+!  rsrfile    - componente de radiação soloar de onda curta;
+!  precipfile - precipitação
+!
+!---------------------------------------------------------------------
+&ephst_forcfl
+   tairfile   = '../dados/forc/1km/sgp97_lw-tair.02190697',
+   presfile   = '../dados/forc/1km/sgp97_lw-pres.02190697',
+   relhfile   = '../dados/forc/1km/sgp97_lw-relh.02190697',
+   wspdfile   = '../dados/forc/1km/sgp97_lw-wspd.02190697',
+   rsifile    = '../dados/forc/1km/sgp97_lw-goes.02190697',
+   rsrfile    = '../dados/forc/1km/sgp97_lw-lw.02190697',
+   precipfile = '../dados/forc/1km/sgp97_lw-precip.02190697',
+$END
+
+!---------------------------------------------------------------------
+!ephst_obsfl
+!
+!  QOBSfile  - vazão observada no exutório da bacia;
+!  RnOBSfile - radiação líquida média sobre a bacia;
+!  SFOBSfile - fluxos verticais médios sobre a bacia;
+!---------------------------------------------------------------------
+&ephst_obsfl
+   QOBSfile  = '../dados/obs/sgp97_lw-vza550.dat',
+   RnOBSfile = '../dados/obs/sgp97_LW02-RnObs-1h.dat', 
+   SFOBSfile = '../dados/obs/sgp97_LW02-SFObs-1h.dat',
+$END
+
+!---------------------------------------------------------------------
+!*ephst_runopt*  -  Opções para tipos de rodadas - Options for run types
+!                   Controla o modo como o molelo opera - Control the way the 
+!                   model operate.
+!  
+! ephstrunmode  = 0 - rodada descoplada;
+!               = 1 - rodada acoplada;
+!
+! epstopt       = 0 - svat original do ARPS (soilebm2d);
+!               = 1 - epst baseado no isba3l e no vic3l;
+!               = 2 - epst baseado no isba3l e no vic3l, incluindo,a 
+!                     partir do cálculo da profundidade da linha d'água,
+!                     a geração de escoamento por excesso saturação;
+!               = 3   futuras implementações;
+! 
+! epelopt       = 0 - redistribuição lateral do escoamento desligada;
+!               = 1 - ativa a redistribuição lateral utlizando a rotina
+!                     RoutSubSfc baseada no modelo DHSVM;
+!                     Obs.: essa opção também ativa a atualização da 
+!                     profundidade da linha d'água na rotina DEPST3L2D;
+!               = 2 - igual a 1, mais a propagação dos escoamentos 
+!                     superficiais e em canal seguindo o algoritmo de
+!                     propagação linear do topmodel;
+!               = 3   futuras implementações;
+!
+!---------------------------------------------------------------------
+&ephst_runopt
+   ephstmode   = 0,
+   epstopt     = 2,
+   epelopt     = 1,
+$END
+
+!---------------------------------------------------------------------
+!Opcoes globais de inicialização
+!Global inicialization options
+!ephst_initopt
+!
+!   slopeopt = 0, le o mapa de declividades e de aspecto 
+!                 de arquivos precpocessados pelo GRASS;
+!              1, Calcula os mapas de declividade e aspecto
+!                 através da rotina HeadSlopeAspect, ou seja,
+!                 considera a profundidade da linha dagua;
+!              2, Calcula os mapas de declividade e aspecto
+!                 através da rotina ElevationSlopeAspect, ou seja,
+!                 considera a topografia;
+!              
+!---------------------------------------------------------------------
+&ephst_initopt
+   slopeopt = 1,
+$END
+
+!---------------------------------------------------------------------
+!Opções para inicialização do estado do modelo
+!Options to inicialize the model satate
+!ephst_initmodelstate
+!
+!   smopt - opção de inicialização da umidade do solo
+!           1 = constante no espaço, inicializado no arquivo input;
+               (default/automática)
+!           2 = variável no plano xy, inicializado de aquivo de dados;
+!           3 = variável em xyz, inicializado de arquivo de dados e 
+!               algoritmo de distribuição vertical da umidade
+!           4 = variável em xyz, inicializado de arquivo de dados e 
+!               perfil de varição em z;
+!   
+!---------------------------------------------------------------------
+&ephst_initmodelstate
+   smopt   = 1,
+   smxyfile  = 'dados/umidade/estar/  ',
+   smzfile   = 'dados/umidade/shawms/  ',
+   tsfcini   =  289.2187,
+   tdp2ini   =  300.7137,
+   wsini     =  0.190,
+   w2ini     =  0.190,
+   w3ini     =  0.290,
+   wcini     =  0.00001,
+   sdini     =  0.0,
+$END 
+
+!---------------------------------------------------------------------
+! Opções para integração utilizando o método de range-kutta de 4 ordem
+!
+!---------------------------------------------------------------------
+&ephst_rk4
+   ho    = 120,
+$END
+
+
+!---------------------------------------------------------------------
+!Parâmetros constantes para os SVATs
+!
+!ephst_svatpar
+!
+!  sigma   -   constante de Stefan-Boltzmann [W.m-2.K-4]
+!  emissa  -   emissividade do ar
+!  emissg  -   emissividade do solo
+!  roa     -   densidade do ar [kg.m-3]
+!  row     -   densidade da água [kg.m-3]
+!  pi      -   constante
+!  L       -   calor latente de vaporização [J.kg-1]
+!  Cp      -   calor específico do ar a pressão constante [J.kg-1.k-1]
+!  Cv      -   capacidade de calor da vegetação [K.m-1.J-1]
+!
+!
+!---------------------------------------------------------------------
+&ephst_svatpar
+   Wl     = 0.000001,
+   Cdhlnd = 0.0015,
+   Cdhwtr = 0.0040,
+   Cdqlnd = 0.0010,
+   Cdqwtr = 0.0040,
+   C4lref = 6089,
+   C4b    = 11.5,
+   Bvic   =  0.20,
+$END
+
+!---------------------------------------------------------------------
+!Opção para ativar parametrização de umidade para o SVAT do ARPS
+!
+!---------------------------------------------------------------------
+&ephst_soilebm
+   moist   =  1,
+$END   
+
+
+!---------------------------------------------------------------------
+!*ephst_topmodel*  -  Parâmetros relativos ao TOPMODEL
+!
+!  CHVDT   -   velocidade de propagação no canal principal  [m/h]
+!  RVDT    -   velocidade de propagação nos canais internos [m/h]
+!  Q0      -   vazão inicial do rio                         [m/dt]
+!
+!
+!---------------------------------------------------------------------
+&ephst_topmodel
+   CHVDT   =   5000.,
+   RVDT    =   3500.,
+   Q0      =   0.00001515,
+   itfile  = '../dados/sfc/100m/sgp97_lw-LnaTb100m.dat',
+$END    
+
+
+!---------------------------------------------------------------------
+!*ephst_output*  - Opções de saída - Output options
+!
+!  flx2dout      - tipo de arquivo de saída bidimencional
+!                    0 - nenhuma saída
+!                    1 - grads
+!                    2 - GMT (não implementada)
+!
+!  flx1dout      - tipo de arquivo de saída unidimencional
+!                    0 - nenhuma saída
+!                    1 - gnuplot script
+!                    2 - a ser implementada pelo usuario
+!
+!  w2dout        -   (não implementada)
+!  w1dout        -   (não implementada)
+!
+!  mbout         - saída do balanço de massa  (não concluído!)
+!                    0 - nenhuma saída
+!                    1 - gnuplot script
+!
+!  avgfout       - gera arquivos de médias
+!
+!  topmodelout   - saídas para o topmodel
+!
+!  nflxstations  - número de estações de verificação de fluxo
+!
+!  nWstations    - número de estações de verificação de umidade do solo
+!
+!  flx2doutfile  - arquivos de saída dos fluxos 2D;
+!
+!  flx1doutfile  - arquivos de saída dos fluxos 1D; 
+!                  (lista dos pontos fixada em stations.inc)
+!
+!  mbfile        - arquivo de saída do balanço de massa
+!
+!  avgffile      - arquivo de saída de médias
+!              
+!  topmodelfile  - arquivo de saída para o TOPMODEL
+!
+!---------------------------------------------------------------------
+&ephst_output
+   flx2dout  = 1,
+   flx1dout  = 1,
+   w2dout    = 0,
+   w1dout    = 0,
+   mbout     = 0,
+   avgfout   = 0,
+   topmodelout  = 0,
+   nflxstations = 9,
+   nWstations   = 9,
+   flx2doutfile = '../saida/sgp97_lw-flx2d-100m2.',
+   flx1doutfile = '../saida/sgp97_lw-flx1d-100m2-',
+   mbfile       = '../saida/sgp97_lw-mb100m2-',
+   avgffile     = '../saida/sgp97_lw-avgf100m2.dat',
+   topmodelfile = '../saida/sgp97_lw-epq100m2.dat',
+$END
+
+
